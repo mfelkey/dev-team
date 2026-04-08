@@ -7,8 +7,6 @@ from crewai import Agent, LLM
 
 load_dotenv("config/.env")
 
-from config.langfuse_setup import init_langfuse
-init_langfuse()
 
 # ── Notification helpers ──────────────────────────────────────────────────────
 
