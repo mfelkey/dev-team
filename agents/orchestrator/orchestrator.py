@@ -162,3 +162,45 @@ def build_devteam_orchestrator() -> Agent:
         verbose=True,
         allow_delegation=True
     )
+
+
+# ── Run function ──────────────────────────────────────────────────────────────
+
+def run_dev_orchestrator(brief: str, context: dict) -> str:
+    """
+    Instantiate the Dev-Team Orchestrator, run it against the brief, return output.
+
+    Called by flows/dev_intake_flow.py via:
+        run_dev_orchestrator = _import_orchestrator()
+        result = run_dev_orchestrator(brief=brief_text, context=project_context)
+    """
+    from crewai import Crew, Task
+
+    agent = build_devteam_orchestrator()
+    context_block = (
+        context.get("raw", "")
+        or (json.dumps(context, indent=2) if context else "No context provided.")
+    )
+
+    task = Task(
+        description=(
+            f"Project brief:\n{brief}\n\n"
+            f"Project context:\n{context_block}\n\n"
+            "Receive this software development project request, initialize a "
+            "structured project context, route to the correct dev sub-team "
+            "(backend, frontend, mobile, DevOps, QA), manage checkpoints, and "
+            "coordinate handoffs between agents. Produce a complete project "
+            "specification and execution plan. End with CROSS-TEAM FLAGS and "
+            "OPEN QUESTIONS."
+        ),
+        expected_output=(
+            "Complete Dev-Team project specification and execution plan. "
+            "No placeholders. All sections fully populated. "
+            "Ends with CROSS-TEAM FLAGS and OPEN QUESTIONS."
+        ),
+        agent=agent,
+    )
+
+    crew = Crew(agents=[agent], tasks=[task], verbose=True)
+    result = crew.kickoff()
+    return str(result)
