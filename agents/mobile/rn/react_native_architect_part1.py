@@ -174,7 +174,7 @@ Every code block must be complete. No placeholders.
 
 def build_rn_architect() -> Agent:
     llm = LLM(
-        model=os.getenv("TIER2_MODEL", "ollama/qwen2.5-coder:32b"),
+        model=os.getenv("TIER2_MODEL", "ollama/qwen3-coder:30b"),
         base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"),
         timeout=3600
     )

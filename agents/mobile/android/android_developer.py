@@ -15,7 +15,7 @@ load_dotenv("config/.env")
 
 def build_android_developer() -> Agent:
     llm = LLM(
-        model=os.getenv("TIER2_MODEL", "ollama/qwen2.5-coder:32b"),
+        model=os.getenv("TIER2_MODEL", "ollama/qwen3-coder:30b"),
         base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"),
         timeout=1800
     )
