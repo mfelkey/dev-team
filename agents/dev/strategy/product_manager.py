@@ -12,7 +12,7 @@ load_dotenv("config/.env")
 
 def build_product_manager() -> Agent:
     llm = LLM(
-        model=os.getenv("TIER1_MODEL", "ollama/gpt-oss:120b"),
+        model=os.getenv("TIER1_MODEL", "ollama/qwen3:32b"),
         base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
     )
 

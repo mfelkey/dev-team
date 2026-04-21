@@ -20,7 +20,7 @@ except ImportError:
 
 def build_accessibility_specialist() -> Agent:
     llm = LLM(
-        model=os.getenv("TIER1_MODEL", "ollama/qwen2.5:72b"),
+        model=os.getenv("TIER1_MODEL", "ollama/qwen3:32b"),
         base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"),
         timeout=1800
     )

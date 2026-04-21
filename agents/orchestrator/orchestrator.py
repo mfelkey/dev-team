@@ -134,7 +134,7 @@ def request_human_approval(context: dict, checkpoint_name: str,
 def build_devteam_orchestrator() -> Agent:
     """Instantiate and return the Dev-Team Orchestrator agent."""
     llm = LLM(
-        model=os.getenv("TIER1_MODEL", "ollama/gpt-oss:120b"),
+        model=os.getenv("TIER1_MODEL", "ollama/qwen3:32b"),
         base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
     )
 
